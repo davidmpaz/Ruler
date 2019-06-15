@@ -2,6 +2,7 @@
 
 namespace Ruler\Test\Functional;
 
+use PHPUnit\Framework\TestCase;
 use Ruler\RuleBuilder;
 use Ruler\Context;
 
@@ -17,7 +18,7 @@ use Ruler\Operator\EqualTo;
  *
  * @package Ruler\Test\Functional
  */
-class RulerPropositionTest extends \PHPUnit_Framework_TestCase
+class RulerPropositionTest extends TestCase
 {
     /**
      * Testing rules like this:
