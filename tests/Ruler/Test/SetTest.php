@@ -2,11 +2,12 @@
 
 namespace Ruler\Test;
 
+use PHPUnit\Framework\TestCase;
 use Ruler\Set;
 use Ruler\Value;
 use Ruler\Test\Fixtures\toStringable;
 
-class SetTest extends \PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
     public function testNonStringableObject()
     {
