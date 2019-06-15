@@ -7,8 +7,9 @@ use Ruler\Value;
 use Ruler\RuleBuilder;
 use Ruler\RuleBuilder\Variable;
 use Ruler\RuleBuilder\VariableProperty;
+use PHPUnit\Framework\TestCase;
 
-class VariablePropertyTest extends \PHPUnit_Framework_TestCase
+class VariablePropertyTest extends TestCase
 {
     public function testConstructor()
     {
@@ -73,7 +74,8 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
                 ),
                 'e' => 'string',
                 'f' => 'ring',
-                'g' => 'stuff'
+                'g' => 'stuff',
+                'h' => 'STRING',
             ),
         ));
 
@@ -86,6 +88,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $varE = $root['e'];
         $varF = $root['f'];
         $varG = $root['g'];
+        $varH = $root['h'];
 
         $this->assertInstanceOf('Ruler\Operator\GreaterThan', $varA->greaterThan(0));
         $this->assertTrue($varA->greaterThan(0)->evaluate($context));
@@ -120,6 +123,9 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Ruler\Operator\StringContains', $varE->stringContains('ring'));
         $this->assertTrue($varE->stringContains($varF)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\StringContainsInsensitive', $varE->stringContainsInsensitive('STRING'));
+        $this->assertTrue($varE->stringContainsInsensitive($varH)->evaluate($context));
 
         $this->assertInstanceOf('Ruler\Operator\StringDoesNotContain', $varE->stringDoesNotContain('cheese'));
         $this->assertTrue($varE->stringDoesNotContain($varG)->evaluate($context));
@@ -156,7 +162,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Deprecated
+     * @expectedException PHPUnit\Framework\Error\Deprecated
      * @expectedExceptionMessage Contains operator is deprecated, please use SetContains
      */
     public function testDeprecationNoticeForContainsWithSet()
@@ -171,7 +177,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Deprecated
+     * @expectedException PHPUnit\Framework\Error\Deprecated
      * @expectedExceptionMessage Contains operator is deprecated, please use StringContains
      */
     public function testDeprecationNoticeForContainsWithString()
